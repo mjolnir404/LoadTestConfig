@@ -1,0 +1,24 @@
+{
+  "jobs": [
+    {
+      "type": "http",
+      "args": {
+        "request": {
+          "method": "GET",
+          "path": "http://146.158.54.24:80"
+        },
+        "interval_ms": 1
+      }
+    },
+    {
+      "type": "http",
+      "args": {
+        "request": {
+          "method": "GET",
+          "path": "https://146.158.54.24:443"
+        },
+        "interval_ms": 1
+      }
+    }
+  ]
+}
