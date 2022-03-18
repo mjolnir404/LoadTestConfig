@@ -22,7 +22,6 @@
     },
     {
       "type": "tcp",
-      "count": 10,
       "args": {
         "address": "188.124.43.50:21",
         "body": "{{ random_payload 10 }}",
@@ -31,7 +30,6 @@
     },
     {
       "type": "tcp",
-      "count": 10,
       "args": {
         "address": "188.124.43.50:25",
         "body": "{{ random_payload 10 }}",
@@ -40,7 +38,6 @@
     },
     {
       "type": "tcp",
-      "count": 10,
       "args": {
         "address": "188.124.43.50:81",
         "body": "{{ random_payload 10 }}",
