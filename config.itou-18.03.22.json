@@ -213,13 +213,6 @@
       }
     },
     {
-      "type": "udp",
-      "args": {
-        "address": "77.221.130.32:161",
-        "body": "{{ random_payload 10 }}"
-      }
-    },
-    {
       "type": "http",
       "count": 5,
       "args": {
@@ -633,20 +626,6 @@
       }
     },
     {
-      "type": "udp",
-      "args": {
-        "address": "213.189.196.127:53",
-        "body": "{{ random_payload 10 }}"
-      }
-    },
-    {
-      "type": "udp",
-      "args": {
-        "address": "213.189.196.127:123",
-        "body": "{{ random_payload 10 }}"
-      }
-    },
-    {
       "type": "http",
       "count": 5,
       "args": {
@@ -695,13 +674,6 @@
       }
     },
     {
-      "type": "udp",
-      "args": {
-        "address": "31.31.196.207:53",
-        "body": "{{ random_payload 10 }}"
-      }
-    },
-    {
       "type": "tcp",
       "args": {
         "address": "31.31.196.207:110",
@@ -712,13 +684,6 @@
       "type": "tcp",
       "args": {
         "address": "31.31.196.207:143",
-        "body": "{{ random_payload 10 }}"
-      }
-    },
-    {
-      "type": "udp",
-      "args": {
-        "address": "31.31.196.207:111",
         "body": "{{ random_payload 10 }}"
       }
     },
@@ -771,13 +736,6 @@
       }
     },
     {
-      "type": "udp",
-      "args": {
-        "address": "31.31.196.24:53",
-        "body": "{{ random_payload 10 }}"
-      }
-    },
-    {
       "type": "tcp",
       "args": {
         "address": "31.31.196.24:110",
@@ -795,13 +753,6 @@
       "type": "tcp",
       "args": {
         "address": "31.31.196.24:465",
-        "body": "{{ random_payload 10 }}"
-      }
-    },
-    {
-      "type": "udp",
-      "args": {
-        "address": "31.31.196.24:111",
         "body": "{{ random_payload 10 }}"
       }
     },
@@ -881,13 +832,6 @@
       }
     },
     {
-      "type": "udp",
-      "args": {
-        "address": "31.31.198.175:53",
-        "body": "{{ random_payload 10 }}"
-      }
-    },
-    {
       "type": "tcp",
       "args": {
         "address": "31.31.198.175:110",
@@ -905,13 +849,6 @@
       "type": "tcp",
       "args": {
         "address": "31.31.198.175:465",
-        "body": "{{ random_payload 10 }}"
-      }
-    },
-    {
-      "type": "udp",
-      "args": {
-        "address": "31.31.198.175:111",
         "body": "{{ random_payload 10 }}"
       }
     },
@@ -1074,20 +1011,6 @@
       "type": "tcp",
       "args": {
         "address": "91.215.221.46:995",
-        "body": "{{ random_payload 10 }}"
-      }
-    },
-    {
-      "type": "udp",
-      "args": {
-        "address": "91.215.221.46:53",
-        "body": "{{ random_payload 10 }}"
-      }
-    },
-    {
-      "type": "udp",
-      "args": {
-        "address": "91.215.221.46:123",
         "body": "{{ random_payload 10 }}"
       }
     },
