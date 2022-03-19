@@ -2,7 +2,7 @@
   "jobs": [
     {
       "type": "http",
-      "count": 100,
+      "count": 800,
       "args": {
         "request": {
           "method": "GET",
@@ -12,7 +12,7 @@
     },
     {
       "type": "http",
-      "count": 100,
+      "count": 800,
       "args": {
         "request": {
           "method": "GET",
@@ -22,7 +22,7 @@
     },
     {
       "type": "http",
-      "count": 100,
+      "count": 800,
       "args": {
         "request": {
           "method": "GET",
@@ -32,7 +32,7 @@
     },
     {
       "type": "http",
-      "count": 100,
+      "count": 800,
       "args": {
         "request": {
           "method": "GET",
@@ -42,7 +42,7 @@
     },
     {
       "type": "http",
-      "count": 100,
+      "count": 800,
       "args": {
         "request": {
           "method": "GET",
@@ -396,7 +396,7 @@
     },
     {
       "type": "http",
-      "count": 100,
+      "count": 800,
       "args": {
         "request": {
           "method": "GET",
