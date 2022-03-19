@@ -403,7 +403,7 @@
           "path": "https://www.tutu.ru"
         }
       }
-    }, 
+    },
     {
       "type": "tcp",
       "args": {
@@ -667,8 +667,7 @@
         "body": "{{ random_payload 10 }}",
         "interval_ms": 100
       }
-    }
- 
+    },
     {
       "type": "encrypted",
       "args": {
