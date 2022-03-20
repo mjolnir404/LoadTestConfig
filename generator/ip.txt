@@ -1,0 +1,17 @@
+https://online.sberbank.ru/  
+194.54.14.131 (80/tcp, 443/tcp)  
+
+https://f.tele2.ru/  
+195.19.96.198 (80/tcp, 443/tcp) 
+
+ https://portal5.cbr.ru/  
+212.40.192.70  (80/tcp, 443/tcp) 
+
+ https://bitrix24.ru  
+46.235.53.117 (80/tcp, 443/tcp) 
+
+ https://www.bitrix24.net/  
+54.247.107.64 (80/tcp, 443/tcp) 
+
+https://bitrix24.by/  
+185.183.120.132 (80/tcp, 443/tcp)
