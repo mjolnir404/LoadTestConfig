@@ -81,9 +81,7 @@ rawdata.split(/\r?\n/).forEach((line, index) => {
   }
 });
 
-// console.log(JSON.stringify(jobs));
-
-const jsonString = JSON.stringify(jobs);
+const jsonString = JSON.stringify(jobs, null, 2);
 
 fs.writeFile('./output.json', jsonString, (err) => {
   if (err) {
