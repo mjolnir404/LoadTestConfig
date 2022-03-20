@@ -36,16 +36,6 @@
       "args": {
         "request": {
           "method": "GET",
-          "path": "https://50cents.pro/"
-        }
-      }
-    },
-    {
-      "type": "http",
-      "count": 10,
-      "args": {
-        "request": {
-          "method": "GET",
           "path": "https://www.pay.24online.cc/"
         }
       }
