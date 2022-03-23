@@ -21,15 +21,15 @@ class JobHTTP {
       request: {
         method: 'GET',
         path: url,
-        headers: {
-          'sec-ch-ua':
-            "'Not A;Brand';v='99', 'Chromium';v='99', 'Google Chrome';v='99'",
-          'sec-ch-ua-mobile': '?0',
-          'sec-ch-ua-platform': 'Linux',
-          'Upgrade-Insecure-Requests': '1',
-          'User-Agent':
-            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36',
-        },
+        // headers: {
+        //   'sec-ch-ua':
+        //     "'Not A;Brand';v='99', 'Chromium';v='99', 'Google Chrome';v='99'",
+        //   'sec-ch-ua-mobile': '?0',
+        //   'sec-ch-ua-platform': 'Linux',
+        //   'Upgrade-Insecure-Requests': '1',
+        //   'User-Agent':
+        //     'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36',
+        // },
       },
     };
   }
