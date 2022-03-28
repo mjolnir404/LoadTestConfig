@@ -2,9 +2,23 @@ import ipRegex from 'ip-regex';
 import urlRegex from 'url-regex';
 import fs from 'fs';
 
-class JobTCP_UDP {
-  constructor(type, ip, port, payload, interval_ms) {
+class JobHTTP {
+  constructor(url, count, client) {
+    this.type = 'http';
+    this.count = count;
+    this.args = {
+      request: {
+        method: 'GET',
+        path: url,
+      },
+      client: client,
+    };
+  }
+}
+class JobTCP {
+  constructor(type, count, ip, port, payload, interval_ms) {
     this.type = type;
+    this.count = count;
     this.args = {
       address: `${ip}:${port}`,
       body: `{{ random_payload ${payload} }}`,
@@ -13,24 +27,15 @@ class JobTCP_UDP {
   }
 }
 
-class JobHTTP {
-  constructor(url, count) {
-    this.type = 'http';
+class JobUDP {
+  constructor(type, count, ip, port, payload, interval_ms) {
+    this.type = type;
+    this.filter = '{{ (.Value (ctx_key "global")).EnablePrimitiveJobs }}';
     this.count = count;
     this.args = {
-      request: {
-        method: 'GET',
-        path: url,
-        // headers: {
-        //   'sec-ch-ua':
-        //     "'Not A;Brand';v='99', 'Chromium';v='99', 'Google Chrome';v='99'",
-        //   'sec-ch-ua-mobile': '?0',
-        //   'sec-ch-ua-platform': 'Linux',
-        //   'Upgrade-Insecure-Requests': '1',
-        //   'User-Agent':
-        //     'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36',
-        // },
-      },
+      address: `${ip}:${port}`,
+      body: `{{ random_payload ${payload} }}`,
+      interval_ms: interval_ms,
     };
   }
 }
@@ -46,9 +51,10 @@ rawdata.split(/\r?\n/).forEach((line, index) => {
   const portsTCP = line.match(/\d+(?=\/tcp)/g);
   const portsUDP = line.match(/\d+(?=\/udp)/g);
   const skipHTTPPorts = false;
+  const count = 18; // Global count
 
   if (url) {
-    const count = 10;
+    // const count = 10;
     let job = new JobHTTP(url[0], count);
     jobs.jobs.push(job);
   }
@@ -56,15 +62,16 @@ rawdata.split(/\r?\n/).forEach((line, index) => {
   if (portsTCP) {
     portsTCP.forEach((port) => {
       const type = 'tcp';
+      // const count = 10;
       const payload = 10;
-      const interval_ms = 100;
+      const interval_ms = 1;
       if (skipHTTPPorts) {
         if (port !== '80' && port !== '443') {
-          let job = new JobTCP_UDP(type, ip, port, payload, interval_ms);
+          let job = new JobTCP(type, count, ip, port, payload, interval_ms);
           jobs.jobs.push(job);
         }
       } else {
-        let job = new JobTCP_UDP(type, ip, port, payload, interval_ms);
+        let job = new JobTCP(type, count, ip, port, payload, interval_ms);
         jobs.jobs.push(job);
       }
     });
@@ -73,9 +80,10 @@ rawdata.split(/\r?\n/).forEach((line, index) => {
   if (portsUDP) {
     portsUDP.forEach((port) => {
       const type = 'udp';
-      const payload = 100;
-      const interval_ms = 100;
-      let job = new JobTCP_UDP(type, ip, port, payload, interval_ms);
+      // const count = 10;
+      const payload = 10;
+      const interval_ms = 1000;
+      let job = new JobUDP(type, count, ip, port, payload, interval_ms);
       jobs.jobs.push(job);
     });
   }
