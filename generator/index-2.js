@@ -2,7 +2,7 @@ import ipRegex from 'ip-regex';
 import urlRegex from 'url-regex';
 import fs from 'fs';
 
-const debug = true;
+const debug = false;
 
 class JobHTTP {
   constructor(url, count, client) {
@@ -59,6 +59,10 @@ class Target {
   }
 }
 
+function removeURLSchema(url) {
+  return url.replace(/^https?:\/\//, '');
+}
+
 // Parse file and get targets
 
 let targets = [];
@@ -101,35 +105,6 @@ rawdata.split(/\r?\n/).forEach((line, index) => {
       });
     }
   }
-
-  // if (portsTCP) {
-  //   portsTCP.forEach((port) => {
-  //     const type = 'tcp';
-  //     // const count = 10;
-  // const payload = 10;
-  // const interval_ms = 1;
-  //     if (skipHTTPPorts) {
-  //       if (port !== '80' && port !== '443') {
-  //         let job = new JobTCP(type, count, ip, port, payload, interval_ms);
-  //         jobs.jobs.push(job);
-  //       }
-  //     } else {
-  //       let job = new JobTCP(type, count, ip, port, payload, interval_ms);
-  //       jobs.jobs.push(job);
-  //     }
-  //   });
-  // }
-
-  // if (portsUDP) {
-  //   portsUDP.forEach((port) => {
-  //     const type = 'udp';
-  //     // const count = 10;
-  //     const payload = 10;
-  //     const interval_ms = 1000;
-  //     let job = new JobUDP(type, count, ip, port, payload, interval_ms);
-  //     jobs.jobs.push(job);
-  //   });
-  // }
 });
 
 // Create Jobs
@@ -138,15 +113,16 @@ let jobs = {
   jobs: [],
 };
 
-const skipNoSchemaURLs = false;
-const count = 18; // Global count
+// const skipNoSchemaURLs = false; // Not implemented yet
+const count = 18; // Global Job count
 
 targets.forEach((target) => {
   target.ip.forEach((ip) => {
     // Handling HTTP Jobs
     if (ip.type === 'tcp' && ip.port === '443') {
       let job = new JobHTTP(
-        target.url,
+        `https://${removeURLSchema(target.url)}`,
+        // target.url,
         count,
         new Client(ip.address, ip.port, true),
       );
@@ -154,7 +130,8 @@ targets.forEach((target) => {
     }
     if (ip.type === 'tcp' && ip.port === '80') {
       let job = new JobHTTP(
-        target.url,
+        `http://${removeURLSchema(target.url)}`,
+        // target.url,
         count,
         new Client(ip.address, ip.port, false),
       );
@@ -179,6 +156,7 @@ targets.forEach((target) => {
   });
 });
 
+// Console log Targets list
 if (debug) {
   targets.forEach((target) => {
     console.log(`${target.url}`);
@@ -189,6 +167,7 @@ if (debug) {
 }
 
 const jsonString = JSON.stringify(jobs, null, 2);
+console.log(`Number of Targets: ${targets.length}`);
 console.log(`Number of Jobs: ${jobs.jobs.length}`);
 
 fs.writeFile('./output.json', jsonString, (err) => {
