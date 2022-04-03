@@ -189,7 +189,7 @@ services:
 
   # creates OpenVPN Docker container
   ovpn_07:
-    container_name: ovpn_07_protonvpn
+    container_name: ovpn_07_mullvad
     image: ghcr.io/wfg/openvpn-client:2.1.0
     cap_add:
       - NET_ADMIN
@@ -198,17 +198,17 @@ services:
     restart: unless-stopped
     volumes:
       - /dev/net:/dev/net:z
-      - ./openvpn/protonvpn/:/data/vpn:z
+      - ./openvpn/mullvad/:/data/vpn:z
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=1
     environment:
       KILL_SWITCH: 'on'
       HTTP_PROXY: 'off'
-      VPN_AUTH_SECRET: protonvpn_secret
-      # VPN_CONFIG_PATTERN: '*.ovpn' # this will match provider01_country01.conf, provider01_country02.conf etc
-      VPN_CONFIG_FILE: ru.protonvpn.com.udp.ovpn # will use only this .conf file
+      VPN_AUTH_SECRET: mullvad_secret
+      VPN_CONFIG_PATTERN: '*.conf' # this will match provider01_country01.conf, provider01_country02.conf etc
+      # VPN_CONFIG_FILE: provider02.endpoint01.conf # will use only this .conf file
     secrets:
-      - protonvpn_secret
+      - mullvad_secret
     labels:
       autoheal: 'true'
     healthcheck:
@@ -219,7 +219,37 @@ services:
 
   # creates OpenVPN Docker container
   ovpn_08:
-    container_name: ovpn_08_protonvpn
+    container_name: ovpn_08_mullvad
+    image: ghcr.io/wfg/openvpn-client:2.1.0
+    cap_add:
+      - NET_ADMIN
+    security_opt:
+      - label:disable
+    restart: unless-stopped
+    volumes:
+      - /dev/net:/dev/net:z
+      - ./openvpn/mullvad/:/data/vpn:z
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=1
+    environment:
+      KILL_SWITCH: 'on'
+      HTTP_PROXY: 'off'
+      VPN_AUTH_SECRET: mullvad_secret
+      VPN_CONFIG_PATTERN: '*.conf' # this will match provider01_country01.conf, provider01_country02.conf etc
+      # VPN_CONFIG_FILE: provider02.endpoint01.conf # will use only this .conf file
+    secrets:
+      - mullvad_secret
+    labels:
+      autoheal: 'true'
+    healthcheck:
+      test: ['CMD', 'nslookup', 'google.com', '8.8.8.8']
+      timeout: 10s
+      interval: 30s
+      retries: 3
+
+ # creates OpenVPN Docker container
+  ovpn_09:
+    container_name: ovpn_09_protonvpn
     image: ghcr.io/wfg/openvpn-client:2.1.0
     cap_add:
       - NET_ADMIN
@@ -248,38 +278,8 @@ services:
       retries: 3
 
   # creates OpenVPN Docker container
-  ovpn_09:
-    container_name: ovpn_09_mullvad
-    image: ghcr.io/wfg/openvpn-client:2.1.0
-    cap_add:
-      - NET_ADMIN
-    security_opt:
-      - label:disable
-    restart: unless-stopped
-    volumes:
-      - /dev/net:/dev/net:z
-      - ./openvpn/mullvad/:/data/vpn:z
-    sysctls:
-      - net.ipv6.conf.all.disable_ipv6=1
-    environment:
-      KILL_SWITCH: 'on'
-      HTTP_PROXY: 'off'
-      VPN_AUTH_SECRET: mullvad_secret
-      VPN_CONFIG_PATTERN: '*.conf' # this will match provider01_country01.conf, provider01_country02.conf etc
-      # VPN_CONFIG_FILE: provider02.endpoint01.conf # will use only this .conf file
-    secrets:
-      - mullvad_secret
-    labels:
-      autoheal: 'true'
-    healthcheck:
-      test: ['CMD', 'nslookup', 'google.com', '8.8.8.8']
-      timeout: 10s
-      interval: 30s
-      retries: 3
-
-  # creates OpenVPN Docker container
   ovpn_10:
-    container_name: ovpn_10_mullvad
+    container_name: ovpn_10_protonvpn
     image: ghcr.io/wfg/openvpn-client:2.1.0
     cap_add:
       - NET_ADMIN
@@ -288,17 +288,17 @@ services:
     restart: unless-stopped
     volumes:
       - /dev/net:/dev/net:z
-      - ./openvpn/mullvad/:/data/vpn:z
+      - ./openvpn/protonvpn/:/data/vpn:z
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=1
     environment:
       KILL_SWITCH: 'on'
       HTTP_PROXY: 'off'
-      VPN_AUTH_SECRET: mullvad_secret
-      VPN_CONFIG_PATTERN: '*.conf' # this will match provider01_country01.conf, provider01_country02.conf etc
-      # VPN_CONFIG_FILE: provider02.endpoint01.conf # will use only this .conf file
+      VPN_AUTH_SECRET: protonvpn_secret
+      # VPN_CONFIG_PATTERN: '*.ovpn' # this will match provider01_country01.conf, provider01_country02.conf etc
+      VPN_CONFIG_FILE: ru.protonvpn.com.udp.ovpn # will use only this .conf file
     secrets:
-      - mullvad_secret
+      - protonvpn_secret
     labels:
       autoheal: 'true'
     healthcheck:
