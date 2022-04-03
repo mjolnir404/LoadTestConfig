@@ -205,8 +205,8 @@ services:
       KILL_SWITCH: 'on'
       HTTP_PROXY: 'off'
       VPN_AUTH_SECRET: protonvpn_secret
-      VPN_CONFIG_PATTERN: '*.ovpn' # this will match provider01_country01.conf, provider01_country02.conf etc
-      # VPN_CONFIG_FILE: provider02.endpoint01.conf # will use only this .conf file
+      # VPN_CONFIG_PATTERN: '*.ovpn' # this will match provider01_country01.conf, provider01_country02.conf etc
+      VPN_CONFIG_FILE: ru.protonvpn.com.udp.ovpn # will use only this .conf file
     secrets:
       - protonvpn_secret
     labels:
@@ -235,8 +235,8 @@ services:
       KILL_SWITCH: 'on'
       HTTP_PROXY: 'off'
       VPN_AUTH_SECRET: protonvpn_secret
-      VPN_CONFIG_PATTERN: '*.ovpn' # this will match provider01_country01.conf, provider01_country02.conf etc
-      # VPN_CONFIG_FILE: provider02.endpoint01.conf # will use only this .conf file
+      # VPN_CONFIG_PATTERN: '*.ovpn' # this will match provider01_country01.conf, provider01_country02.conf etc
+      VPN_CONFIG_FILE: ru.protonvpn.com.udp.ovpn # will use only this .conf file
     secrets:
       - protonvpn_secret
     labels:
