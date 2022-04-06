@@ -128,64 +128,64 @@ services:
       retries: 3
 
   # creates OpenVPN Docker container
-  ovpn_05:
-    container_name: ovpn_05_ivpn
-    image: ghcr.io/wfg/openvpn-client:2.1.0
-    cap_add:
-      - NET_ADMIN
-    security_opt:
-      - label:disable
-    restart: unless-stopped
-    volumes:
-      - /dev/net:/dev/net:z
-      - ./openvpn/ivpn/:/data/vpn:z
-    sysctls:
-      - net.ipv6.conf.all.disable_ipv6=1
-    environment:
-      KILL_SWITCH: 'on'
-      HTTP_PROXY: 'off'
-      VPN_AUTH_SECRET: ivpn02_secret
-      VPN_CONFIG_PATTERN: ivpn-*.ovpn # this will match provider01_country01.conf, provider01_country02.conf etc
-      # VPN_CONFIG_FILE: provider02.endpoint01.conf # will use only this .conf file
-    secrets:
-      - ivpn02_secret
-    labels:
-      autoheal: 'true'
-    healthcheck:
-      test: ['CMD', 'nslookup', 'google.com', '8.8.8.8']
-      timeout: 10s
-      interval: 30s
-      retries: 3
+  # ovpn_05:
+  #   container_name: ovpn_05_ivpn
+  #   image: ghcr.io/wfg/openvpn-client:2.1.0
+  #   cap_add:
+  #     - NET_ADMIN
+  #   security_opt:
+  #     - label:disable
+  #   restart: unless-stopped
+  #   volumes:
+  #     - /dev/net:/dev/net:z
+  #     - ./openvpn/ivpn/:/data/vpn:z
+  #   sysctls:
+  #     - net.ipv6.conf.all.disable_ipv6=1
+  #   environment:
+  #     KILL_SWITCH: 'on'
+  #     HTTP_PROXY: 'off'
+  #     VPN_AUTH_SECRET: ivpn02_secret
+  #     VPN_CONFIG_PATTERN: ivpn-*.ovpn # this will match provider01_country01.conf, provider01_country02.conf etc
+  #     # VPN_CONFIG_FILE: provider02.endpoint01.conf # will use only this .conf file
+  #   secrets:
+  #     - ivpn02_secret
+  #   labels:
+  #     autoheal: 'true'
+  #   healthcheck:
+  #     test: ['CMD', 'nslookup', 'google.com', '8.8.8.8']
+  #     timeout: 10s
+  #     interval: 30s
+  #     retries: 3
 
   # creates OpenVPN Docker container
-  ovpn_06:
-    container_name: ovpn_06_ivpn
-    image: ghcr.io/wfg/openvpn-client:2.1.0
-    cap_add:
-      - NET_ADMIN
-    security_opt:
-      - label:disable
-    restart: unless-stopped
-    volumes:
-      - /dev/net:/dev/net:z
-      - ./openvpn/ivpn/:/data/vpn:z
-    sysctls:
-      - net.ipv6.conf.all.disable_ipv6=1
-    environment:
-      KILL_SWITCH: 'on'
-      HTTP_PROXY: 'off'
-      VPN_AUTH_SECRET: ivpn02_secret
-      VPN_CONFIG_PATTERN: ivpn-*.ovpn # this will match provider01_country01.conf, provider01_country02.conf etc
-      # VPN_CONFIG_FILE: provider02.endpoint01.conf # will use only this .conf file
-    secrets:
-      - ivpn02_secret
-    labels:
-      autoheal: 'true'
-    healthcheck:
-      test: ['CMD', 'nslookup', 'google.com', '8.8.8.8']
-      timeout: 10s
-      interval: 30s
-      retries: 3
+  # ovpn_06:
+  #   container_name: ovpn_06_ivpn
+  #   image: ghcr.io/wfg/openvpn-client:2.1.0
+  #   cap_add:
+  #     - NET_ADMIN
+  #   security_opt:
+  #     - label:disable
+  #   restart: unless-stopped
+  #   volumes:
+  #     - /dev/net:/dev/net:z
+  #     - ./openvpn/ivpn/:/data/vpn:z
+  #   sysctls:
+  #     - net.ipv6.conf.all.disable_ipv6=1
+  #   environment:
+  #     KILL_SWITCH: 'on'
+  #     HTTP_PROXY: 'off'
+  #     VPN_AUTH_SECRET: ivpn02_secret
+  #     VPN_CONFIG_PATTERN: ivpn-*.ovpn # this will match provider01_country01.conf, provider01_country02.conf etc
+  #     # VPN_CONFIG_FILE: provider02.endpoint01.conf # will use only this .conf file
+  #   secrets:
+  #     - ivpn02_secret
+  #   labels:
+  #     autoheal: 'true'
+  #   healthcheck:
+  #     test: ['CMD', 'nslookup', 'google.com', '8.8.8.8']
+  #     timeout: 10s
+  #     interval: 30s
+  #     retries: 3
 
   # creates OpenVPN Docker container
   ovpn_07:
@@ -336,48 +336,48 @@ services:
       retries: 3
 
   # this Docker container will use VPN 05
-  db1000n_05:
-    container_name: db1000n_05
-    image: ghcr.io/arriven/db1000n-advanced
-    restart: unless-stopped
-    depends_on:
-      ovpn_05:
-        condition: service_healthy
-    network_mode: 'service:ovpn_05'
-    environment:
-      CONFIG: ${CONFIG}
-      # CONFIG: 'config/config.json'
-      SCALE_FACTOR: ${SCALE_FACTOR}
-      # ENABLE_PRIMITIVE: 'false'
-    labels:
-      autoheal: 'true'
-    healthcheck:
-      test: ['CMD', 'nslookup', 'google.com', '8.8.8.8']
-      timeout: 10s
-      interval: 30s
-      retries: 3
+  # db1000n_05:
+  #   container_name: db1000n_05
+  #   image: ghcr.io/arriven/db1000n-advanced
+  #   restart: unless-stopped
+  #   depends_on:
+  #     ovpn_05:
+  #       condition: service_healthy
+  #   network_mode: 'service:ovpn_05'
+  #   environment:
+  #     CONFIG: ${CONFIG}
+  #     # CONFIG: 'config/config.json'
+  #     SCALE_FACTOR: ${SCALE_FACTOR}
+  #     # ENABLE_PRIMITIVE: 'false'
+  #   labels:
+  #     autoheal: 'true'
+  #   healthcheck:
+  #     test: ['CMD', 'nslookup', 'google.com', '8.8.8.8']
+  #     timeout: 10s
+  #     interval: 30s
+  #     retries: 3
 
   # this Docker container will use VPN 06
-  db1000n_06:
-    container_name: db1000n_06
-    image: ghcr.io/arriven/db1000n-advanced
-    restart: unless-stopped
-    depends_on:
-      ovpn_06:
-        condition: service_healthy
-    network_mode: 'service:ovpn_06'
-    environment:
-      CONFIG: ${CONFIG}
-      # CONFIG: 'config/config.json'
-      SCALE_FACTOR: ${SCALE_FACTOR}
-      # ENABLE_PRIMITIVE: 'false'
-    labels:
-      autoheal: 'true'
-    healthcheck:
-      test: ['CMD', 'nslookup', 'google.com', '8.8.8.8']
-      timeout: 10s
-      interval: 30s
-      retries: 3
+  # db1000n_06:
+  #   container_name: db1000n_06
+  #   image: ghcr.io/arriven/db1000n-advanced
+  #   restart: unless-stopped
+  #   depends_on:
+  #     ovpn_06:
+  #       condition: service_healthy
+  #   network_mode: 'service:ovpn_06'
+  #   environment:
+  #     CONFIG: ${CONFIG}
+  #     # CONFIG: 'config/config.json'
+  #     SCALE_FACTOR: ${SCALE_FACTOR}
+  #     # ENABLE_PRIMITIVE: 'false'
+  #   labels:
+  #     autoheal: 'true'
+  #   healthcheck:
+  #     test: ['CMD', 'nslookup', 'google.com', '8.8.8.8']
+  #     timeout: 10s
+  #     interval: 30s
+  #     retries: 3
 
   # this Docker container will use VPN 07
   db1000n_07:
